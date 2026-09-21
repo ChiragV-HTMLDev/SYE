@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Livedin | Share your experience. Inspire someone.</title>
+<meta name="description" content="Share what you create, learn, discover and experience. Connect with people through real stories, creative work and ideas.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Livedin | Share your experience. Inspire someone.">
+<meta property="og:description" content="A free community for real stories, creative work and ideas.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== 1. TOKENS ===== */
+:root{
+  --paper:#F3F4F8; --surface:#FFFFFF; --ink:#0F1226; --muted:#626783; --line:#E1E3EC;
+  --brand:#3B3BF5; --brand-ink:#FFFFFF; --sun:#FFCF33; --rose:#FF9DC6; --mint:#A8F0D1; --sky:#DCDDFF; --like:#E5306E;
+  --font-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --r-sm:12px; --r-md:22px; --r-lg:30px; --r-pill:999px;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --paper:#0B0C17; --surface:#151729; --ink:#F1F2FA; --muted:#9A9EBB; --line:#272A45;
+  --brand:#7B7BFF; --brand-ink:#0B0C17; --sky:#23264A; color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B0C17; --surface:#151729; --ink:#F1F2FA; --muted:#9A9EBB; --line:#272A45;
+    --brand:#7B7BFF; --brand-ink:#0B0C17; --sky:#23264A; color-scheme:dark;
+  }
+}
+
+/* ===== 2. BASE ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--font-body);-webkit-font-smoothing:antialiased}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+input,textarea,select{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.1;letter-spacing:-.025em;margin:0;font-weight:700}
+p{margin:0}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:8px}
+.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+[hidden]{display:none!important}
+
+/* ===== 3. BUTTONS / CHIPS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:var(--r-pill);font-weight:600;transition:transform .2s,background .2s,border-color .2s,filter .2s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn--primary{background:var(--brand);color:var(--brand-ink)}
+.btn--primary:hover{filter:brightness(1.1)}
+.btn--ink{background:var(--ink);color:var(--paper)}
+.btn--ghost{border:1.5px solid var(--line)}
+.btn--ghost:hover{border-color:var(--ink)}
+.btn--white{background:#fff;color:#0F1226}
+.btn--outline-white{border:1.5px solid rgba(255,255,255,.55);color:#fff}
+.btn--outline-white:hover{background:rgba(255,255,255,.14)}
+.btn--sm{min-height:38px;padding:0 16px;font-size:.9rem}
+.btn.is-on{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:var(--r-pill);border:1.5px solid var(--line);background:var(--surface);font-weight:500;font-size:.94rem;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.chip:hover{border-color:var(--ink)}
+.chip.is-active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.icon-btn{width:44px;height:44px;border-radius:50%;display:inline-grid;place-items:center;transition:background .2s}
+.icon-btn:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.badge{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);background:var(--sky);font-size:.82rem;font-weight:600}
+.avatar{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:.95rem;color:#0F1226}
+.avatar--sm{width:34px;height:34px;font-size:.78rem}
+
+/* ===== 4. HEADER ===== */
+.header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 74%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);padding-top:env(safe-area-inset-top,0)}
+.header__inner{display:flex;align-items:center;gap:24px;height:68px;padding:0 24px;max-width:1360px;margin:auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:1.35rem;letter-spacing:-.04em}
+.logo__mark{width:26px;height:26px;border-radius:50% 50% 50% 8px;background:var(--brand);position:relative}
+.logo__mark::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--sun);right:4px;top:4px}
+.nav{display:flex;gap:2px;margin-left:8px}
+.nav__link{padding:8px 14px;border-radius:var(--r-pill);font-weight:500;color:var(--muted);transition:color .2s,background .2s}
+.nav__link:hover,.nav__link.is-current{color:var(--ink);background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.header__actions{margin-left:auto;display:flex;align-items:center;gap:8px;position:relative}
+.search-bar{display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface);border:1.5px solid var(--line);color:var(--muted);width:260px;transition:border-color .2s}
+.search-bar:focus-within{border-color:var(--brand)}
+.search-bar input{border:0;background:none;outline:0;width:100%;color:var(--ink)}
+.header__search-btn{display:none}
+.header__account-btn{display:none}
+.me-btn{padding:0}
+.badge-dot{position:relative}
+.badge-dot::after{content:"3";position:absolute;right:4px;top:4px;min-width:18px;height:18px;border-radius:9px;background:var(--like);color:#fff;font-size:.68rem;font-weight:700;display:grid;place-items:center}
+
+/* ===== 5. APP LAYOUT ===== */
+.app{display:grid;grid-template-columns:220px minmax(0,680px) 300px;gap:32px;justify-content:center;padding:24px 24px 48px;max-width:1360px;margin:auto;align-items:start}
+.side{position:sticky;top:92px;display:grid;gap:6px}
+.side__link{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;font-weight:600;color:var(--muted);transition:background .2s,color .2s}
+.side__link:hover{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
+.side__link.is-current{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:11px 15px}
+.side .btn{margin-top:12px}
+.feed-col{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+
+/* ===== 6. SHORT BANNER ===== */
+.banner{position:relative;overflow:hidden;background:var(--brand);color:#fff;border-radius:var(--r-lg);padding:28px 32px}
+.banner::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#5c5cff;right:-60px;top:-90px}
+.banner::after{content:"";position:absolute;width:64px;height:64px;border-radius:50%;background:var(--sun);right:110px;bottom:-26px}
+:root[data-theme="dark"] .banner,:root:not([data-theme="light"]) .banner{background:#3B3BF5;color:#fff}
+.banner>*{position:relative;z-index:1}
+.banner__title{font-size:clamp(1.6rem,3.4vw,2.35rem);letter-spacing:-.035em;max-width:16ch}
+.banner__text{margin-top:10px;color:rgba(255,255,255,.86);max-width:48ch;font-size:.98rem}
+.banner__actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+
+/* ===== 7. COMPOSER (free post card) ===== */
+.composer{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;display:grid;gap:16px}
+.composer__free{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.composer__free h2{font-size:1.3rem}
+.composer__free span{background:var(--mint);color:#0F1226;border-radius:var(--r-pill);padding:4px 12px;font-size:.82rem;font-weight:700}
+.composer__row{display:flex;gap:14px;align-items:flex-start}
+.composer__fields{flex:1;min-width:0;display:grid;gap:10px}
+.composer__title{width:100%;border:0;background:none;outline:0;font-family:var(--font-display);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;padding:8px 0}
+.composer__title::placeholder,.composer textarea::placeholder,.composer__url::placeholder{color:color-mix(in srgb,var(--muted) 75%,transparent)}
+.composer textarea{width:100%;border:0;background:var(--paper);border-radius:16px;padding:14px 16px;resize:vertical;min-height:96px;outline:0;border:1.5px solid transparent;transition:border-color .2s}
+.composer textarea:focus,.composer__url:focus{border-color:var(--brand)}
+.composer__url{width:100%;border:1.5px solid transparent;background:var(--paper);border-radius:14px;padding:12px 16px;outline:0}
+.prompts{display:grid;gap:10px}
+.prompts label{font-family:var(--font-display);font-weight:700;font-size:.95rem;display:block;margin-bottom:4px}
+.prompts textarea{min-height:64px}
+.upload{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1.5px dashed var(--line);border-radius:16px;padding:14px 16px;color:var(--muted)}
+.upload input{display:none}
+.upload__thumbs{display:flex;gap:8px}
+.upload__thumbs img,.upload__thumbs video{width:48px;height:48px;border-radius:10px;object-fit:cover}
+.composer__types{display:flex;gap:8px;flex-wrap:wrap}
+.type{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 8px;border-radius:var(--r-pill);border:1.5px solid var(--line);font-weight:500;font-size:.92rem;transition:border-color .2s,background .2s}
+.type__dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#0F1226}
+.type__dot .icon{width:15px;height:15px}
+.type:hover{border-color:var(--ink)}
+.type.is-active{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.composer__foot{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+.select{height:44px;border-radius:var(--r-pill);border:1.5px solid var(--line);background:var(--surface);padding:0 16px;outline:0;max-width:100%}
+.select:focus{border-color:var(--brand)}
+[data-for]{display:none}
+[data-for].is-shown{display:grid}
+.upload[data-for].is-shown{display:flex}
+
+/* ===== 8. FILTERS ===== */
+.filters{position:sticky;top:68px;z-index:20;margin:0 -12px;padding:12px 12px 10px;background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;gap:12px;padding-top:calc(12px)}
+.tabs{display:flex;padding:5px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar,.chips::-webkit-scrollbar{display:none}
+.tab{flex:1;padding:9px 18px;border-radius:var(--r-pill);font-weight:600;color:var(--muted);transition:background .2s,color .2s;white-space:nowrap}
+.tab.is-active{background:var(--brand);color:var(--brand-ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+
+/* ===== 9. POST CARD ===== */
+.feed{display:grid;gap:20px}
+.post-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;display:grid;gap:14px;transition:border-color .2s}
+.post-card:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}
+.post-card.is-new{animation:in .5s both}
+@keyframes in{from{opacity:0;transform:translateY(-10px)}}
+.post-card__header{display:flex;align-items:center;gap:12px}
+.post-card__author{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.post-card__author strong{font-weight:600}
+.post-card__author span{color:var(--muted);font-size:.88rem}
+.post-card__time{margin-left:auto;color:var(--muted);font-size:.86rem}
+.post-card__more{margin-right:-10px}
+.post-card__meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+.post-card__meta .icon{width:14px;height:14px}
+.post-card__place{display:inline-flex;align-items:center;gap:4px}
+.post-card__title{font-size:1.5rem;line-height:1.12}
+.post-card__content{color:var(--muted)}
+.post-card__media{border-radius:16px;overflow:hidden;aspect-ratio:16/10;position:relative}
+.post-card__media svg,.gallery svg,.gallery img,.gallery video{width:100%;height:100%;object-fit:cover}
+.gallery{display:grid;gap:6px;border-radius:16px;overflow:hidden;aspect-ratio:16/10;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.gallery--1{grid-template-columns:1fr;grid-template-rows:1fr}
+.gallery--2{grid-template-rows:1fr}
+.gallery--3 .gallery__item:first-child{grid-row:span 2}
+.gallery__item{overflow:hidden;min-height:0}
+.play{position:absolute;inset:0;display:grid;place-items:center}
+.play span{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#0F1226}
+.play .icon{fill:currentColor;width:26px;height:26px;margin-left:3px}
+.play em{position:absolute;right:12px;bottom:12px;background:rgba(15,18,38,.8);color:#fff;border-radius:var(--r-pill);font-style:normal;font-size:.8rem;padding:3px 10px;font-weight:600}
+.link-card{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--paper)}
+.link-card__icon{width:44px;height:44px;border-radius:12px;background:var(--sky);display:grid;place-items:center;flex:none}
+.link-card strong{display:block;font-family:var(--font-display);line-height:1.2;overflow-wrap:anywhere}
+.link-card span{color:var(--muted);font-size:.86rem;overflow-wrap:anywhere}
+.exp{display:grid;border:1px solid var(--line);border-radius:16px;padding:4px 16px;background:var(--paper)}
+.exp__item{padding:12px 0;border-bottom:1px solid var(--line)}
+.exp__item:last-child{border:0}
+.exp__item b{display:block;font-family:var(--font-display);font-size:.95rem}
+.exp__item span{color:var(--muted);font-size:.94rem}
+.post-card__stats{display:flex;gap:18px;color:var(--muted);font-size:.9rem;flex-wrap:wrap}
+.post-card__stats span{display:inline-flex;align-items:center;gap:6px}
+.post-card__stats .icon{width:16px;height:16px}
+.post-card__actions{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding-top:8px;margin-bottom:-6px}
+.action{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:12px;font-size:.92rem;font-weight:500;color:var(--muted);transition:background .2s,color .2s}
+.action:hover{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
+.action.is-on{color:var(--brand)}
+.action[data-like].is-on{color:var(--like)}
+.action.is-on .icon{fill:currentColor}
+.action.pop .icon{animation:pop .4s}
+@keyframes pop{40%{transform:scale(1.4)}}
+
+/* popover menus */
+.menu{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px;min-width:190px;z-index:30;display:none}
+.menu.is-open{display:block}
+.menu a,.menu button{display:block;width:100%;text-align:left;padding:10px 14px;border-radius:10px;font-size:.93rem}
+.menu a:hover,.menu button:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.menu--more{right:16px;top:64px}
+.menu--share{right:0;bottom:56px}
+
+/* comments */
+.comments{display:none;gap:14px;border-top:1px solid var(--line);padding-top:14px}
+.comments.is-open{display:grid}
+.comment{display:flex;gap:10px}
+.comment__bubble{background:var(--paper);border-radius:16px;padding:10px 14px}
+.comment__bubble strong{font-size:.9rem;font-weight:600}
+.comment__bubble p{font-size:.94rem;color:var(--ink);line-height:1.45}
+.comment__meta{display:flex;gap:14px;font-size:.8rem;color:var(--muted);margin:4px 0 0 6px}
+.comment__meta button{font-weight:600}
+.comment__meta button.is-on{color:var(--like)}
+.comment-form{display:flex;gap:10px;align-items:center}
+.comment-form input{flex:1;min-width:0;height:44px;border-radius:var(--r-pill);border:1.5px solid var(--line);background:var(--paper);padding:0 16px;outline:0}
+.comment-form input:focus{border-color:var(--brand)}
+
+/* skeleton + empty */
+.skeleton .sk{background:linear-gradient(90deg,var(--line),color-mix(in srgb,var(--line) 40%,var(--surface)),var(--line));background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:10px}
+@keyframes shimmer{to{background-position:-200% 0}}
+.feed__empty{text-align:center;padding:56px 20px;border:1.5px dashed var(--line);border-radius:var(--r-md);color:var(--muted)}
+.feed__more{display:flex;justify-content:center;padding-top:8px}
+
+/* ===== 10. RIGHT RAIL ===== */
+.rail{position:sticky;top:92px;display:grid;gap:16px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px}
+.box h3{font-size:1.15rem;margin-bottom:14px}
+.trend{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:flex-start}
+.trend:first-of-type{border:0;padding-top:0}
+.trend__rank{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--brand);width:22px;flex:none;line-height:1.2}
+.trend strong{display:block;font-family:var(--font-display);line-height:1.2;font-size:1rem}
+.trend span{font-size:.84rem;color:var(--muted)}
+.who{display:flex;align-items:center;gap:12px;padding:8px 0}
+.who__info{flex:1;min-width:0;line-height:1.3}
+.who__info strong{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who__info span{font-size:.84rem;color:var(--muted)}
+.rail__foot{font-size:.82rem;color:var(--muted);padding:0 8px}
+
+/* ===== 10b. SCROLLER (arrows + swipe) ===== */
+.filters{grid-template-columns:minmax(0,1fr)}
+.scroller{position:relative;min-width:0}
+.scroller__btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;transition:border-color .2s}
+.scroller__btn:hover{border-color:var(--ink)}
+.scroller__btn--prev{left:2px}
+.scroller__btn--next{right:2px}
+.scroller.has-prev::before,.scroller.has-next::after{content:"";position:absolute;top:0;bottom:0;width:72px;z-index:2;pointer-events:none}
+.scroller.has-prev::before{left:0;background:linear-gradient(90deg,var(--paper) 30%,transparent)}
+.scroller.has-next::after{right:0;background:linear-gradient(270deg,var(--paper) 30%,transparent)}
+.tabs,.chips{-webkit-user-select:none;user-select:none}
+.scroller>.chips,.scroller>.tabs{cursor:grab}
+.is-dragging{cursor:grabbing!important}
+.chip--mine{background:var(--sky);border-color:transparent}
+.chip--mine.is-active{background:var(--ink);color:var(--paper)}
+.chip--edit{border-style:dashed;gap:6px;padding-left:12px}
+.chip--edit .icon{width:16px;height:16px}
+
+/* ===== 10c. AUTH MODAL ===== */
+.modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px}
+.modal__backdrop{position:absolute;inset:0;background:rgba(9,10,25,.55);backdrop-filter:blur(4px)}
+.modal__card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto;padding:32px}
+.modal__close{position:absolute;right:14px;top:14px;z-index:2}
+.modal h2{font-size:1.8rem;letter-spacing:-.03em;padding-right:40px}
+.modal__sub{color:var(--muted);margin-top:8px}
+.auth-form{display:grid;gap:14px;margin-top:22px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:.9rem}
+.field input{height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);padding:0 16px;outline:0;transition:border-color .2s;width:100%}
+.field input:focus{border-color:var(--brand)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.auth-error{color:var(--like);font-size:.9rem;min-height:1.2em;margin:0}
+.auth-switch{text-align:center;color:var(--muted);font-size:.94rem;margin-top:18px}
+.auth-switch button{color:var(--brand);font-weight:600}
+.auth-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:10px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.85rem}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.picks{display:grid;gap:18px;margin-top:20px}
+.picks h3{font-size:1rem;margin-bottom:10px}
+.picks__list{display:flex;flex-wrap:wrap;gap:8px}
+.pick{min-height:40px;padding:0 16px;border-radius:var(--r-pill);border:1.5px solid var(--line);font-weight:500;font-size:.93rem;transition:background .2s,border-color .2s}
+.pick:hover{border-color:var(--ink)}
+.pick.is-on{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.picks-foot{position:sticky;bottom:-32px;margin:22px -32px -32px;padding:16px 32px;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.menu--me{right:0;top:52px;min-width:210px}
+.who-me{padding:10px 14px;line-height:1.3;border-bottom:1px solid var(--line);margin-bottom:4px}
+.who-me span{color:var(--muted);font-size:.85rem;display:block}
+
+/* ===== 11. TOAST + MOBILE NAV ===== */
+.toast{position:fixed;left:50%;bottom:calc(32px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:var(--r-pill);font-weight:500;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100;max-width:90vw;text-align:center}
+.toast.is-show{opacity:1;transform:translate(-50%,0)}
+.bottom-nav{display:none}
+
+/* ===== 12. RESPONSIVE ===== */
+@media (max-width:1180px){
+  .app{grid-template-columns:200px minmax(0,680px)}
+  .rail{display:none}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,680px)}
+  .side{display:none}
+  .nav{display:none}
+}
+@media (max-width:680px){
+  .header__inner{height:60px;padding:0 16px;gap:12px}
+  .search-bar,.header__actions .btn{display:none}
+  .header__search-btn,.header__account-btn{display:inline-grid}
+  .me-btn{display:none!important}
+  .app{padding:12px 12px calc(96px + env(safe-area-inset-bottom,0px))}
+  .filters{top:60px;margin:0 -12px}
+  .banner{padding:22px 20px;border-radius:24px}
+  .composer{padding:16px;border-radius:24px}
+  .post-card{padding:16px;border-radius:20px}
+  .post-card__title{font-size:1.3rem}
+  .modal__card{padding:24px 20px}
+  .picks-foot{margin:22px -20px -24px;padding:14px 20px;bottom:-24px}
+  .field-row{grid-template-columns:1fr}
+  .action span{display:none}
+  .menu--share{right:-8px}
+  .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));height:66px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--surface) 84%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);z-index:60;align-items:center;justify-items:center}
+  .bottom-nav a{display:grid;place-items:center;gap:2px;width:100%;height:100%;font-size:.7rem;color:var(--muted);font-weight:500}
+  .bottom-nav a.is-current{color:var(--brand)}
+  .bottom-nav__create{width:54px!important;height:54px!important;border-radius:50%;background:var(--brand);color:var(--brand-ink)!important;margin-top:-24px}
+  .bottom-nav__create .icon{width:24px;height:24px}
+  .bottom-nav__create span{display:none}
+  .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header__inner">
+    <a href="#top" class="logo" aria-label="Livedin home"><span class="logo__mark"></span>livedin</a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav__link is-current" href="#top">Home</a>
+      <a class="nav__link" href="#feed">Explore</a>
+      <a class="nav__link" href="#chips">Categories</a>
+      <a class="nav__link" href="#composer">Create Post</a>
+      <a class="nav__link" href="#people">People</a>
+      <a class="nav__link" href="#top">About</a>
+    </nav>
+    <div class="header__actions">
+      <label class="search-bar"><i data-i="search"></i><span class="sr-only">Search</span><input id="search" type="search" placeholder="Search experiences, people..." autocomplete="off"></label>
+      <button class="icon-btn header__search-btn" aria-label="Search"><i data-i="search"></i></button>
+      <button class="icon-btn badge-dot" aria-label="Notifications, 3 new"><i data-i="bell"></i></button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode"><i data-i="moon"></i></button>
+      <button class="btn btn--ghost btn--sm" id="loginBtn" data-auth="login">Log in</button>
+      <button class="btn btn--primary btn--sm" id="joinBtn" data-auth="register">Join free</button>
+      <button class="icon-btn me-btn" id="meBtn" data-auth="account" aria-label="Account menu" aria-haspopup="menu" hidden></button>
+      <button class="icon-btn header__account-btn" data-auth="account" aria-label="Account"><i data-i="user"></i></button>
+      <div class="menu menu--me" id="meMenu" role="menu"></div>
+    </div>
+  </div>
+</header>
+
+<div class="app" id="top">
+
+  <!-- ===== LEFT NAV ===== -->
+  <aside class="side" aria-label="Sections">
+    <a class="side__link is-current" href="#top"><i data-i="home"></i>Home</a>
+    <a class="side__link" href="#feed"><i data-i="compass"></i>Explore</a>
+    <a class="side__link" href="#people"><i data-i="users"></i>People</a>
+    <a class="side__link" href="#"><i data-i="bell"></i>Notifications</a>
+    <a class="side__link" href="#"><i data-i="bookmark"></i>Saved</a>
+    <a class="side__link" href="#" data-auth="account"><i data-i="user"></i>Profile</a>
+    <a class="btn btn--primary" href="#composer" data-focus-composer><i data-i="plus"></i>Create post</a>
+  </aside>
+
+  <!-- ===== CENTER FEED ===== -->
+  <main class="feed-col">
+
+    <!-- short banner -->
+    <section class="banner" aria-labelledby="bannerTitle">
+      <h1 class="banner__title" id="bannerTitle">Share your experience. Inspire someone.</h1>
+      <p class="banner__text">Share what you create, learn, discover and experience. Connect with people through real stories, creative work and ideas.</p>
+      <div class="banner__actions">
+        <a href="#composer" class="btn btn--white" data-focus-composer>Share Your Experience</a>
+        <a href="#feed" class="btn btn--outline-white">Explore Experiences</a>
+      </div>
+    </section>
+
+    <!-- free post composer -->
+    <section class="composer" id="composer" aria-label="Create a free post">
+      <div class="composer__free"><h2>Share your experience</h2><span>Posting is free</span></div>
+
+      <div class="composer__row">
+        <span class="avatar" id="cAvatar" style="background:#FFCF33">YO</span>
+        <div class="composer__fields">
+          <input class="composer__title" id="cTitle" type="text" maxlength="90" placeholder="Give your experience a title" aria-label="Title">
+
+          <div data-for="text image video link creative" class="is-shown">
+            <textarea id="cStory" placeholder="Tell your story..." aria-label="Your story"></textarea>
+          </div>
+
+          <div class="prompts" data-for="experience">
+            <div><label for="e1">What happened?</label><textarea id="e1" placeholder="Set the scene in a few lines."></textarea></div>
+            <div><label for="e2">What did I learn?</label><textarea id="e2" placeholder="The one thing you would tell a friend."></textarea></div>
+            <div><label for="e3">What would I recommend?</label><textarea id="e3" placeholder="A tip, a tool, or a next step."></textarea></div>
+          </div>
+
+          <input class="composer__url" id="cUrl" data-for="link" type="url" placeholder="https://your-project.com" aria-label="External link">
+
+          <label class="upload" data-for="image video creative">
+            <input type="file" id="cFiles" accept="image/*,video/*" multiple>
+            <span class="btn btn--ghost btn--sm"><i data-i="image"></i>Add photos or video</span>
+            <span id="uploadHint">Upload images or a video. Nothing leaves your browser in this demo.</span>
+            <span class="upload__thumbs" id="thumbs"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="composer__types" role="group" aria-label="Post type" id="types"></div>
+
+      <div class="composer__foot">
+        <select class="select" id="cCat" aria-label="Category"></select>
+        <button class="btn btn--primary" id="publish">Publish experience</button>
+      </div>
+    </section>
+
+    <!-- filters -->
+    <div class="filters" id="filters">
+      <div class="tabs" id="tabs" role="tablist" aria-label="Feed"></div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <!-- feed -->
+    <div class="feed" id="feed" aria-live="polite"></div>
+    <div class="feed__more"><button class="btn btn--ghost" id="more" hidden>Load more</button></div>
+    <div id="sentinel" aria-hidden="true"></div>
+  </main>
+
+  <!-- ===== RIGHT RAIL ===== -->
+  <aside class="rail" aria-label="Discover">
+    <section class="box"><h3>Trending now</h3><div id="trending"></div></section>
+    <section class="box" id="people"><h3>Who to follow</h3><div id="who"></div></section>
+    <p class="rail__foot">About, Privacy, Terms and Help. &copy; 2026 Livedin (placeholder name).</p>
+  </aside>
+</div>
+
+<!-- mobile bottom nav -->
+<nav class="bottom-nav" aria-label="Mobile">
+  <a href="#top" class="is-current"><i data-i="home"></i>Home</a>
+  <a href="#feed"><i data-i="compass"></i>Explore</a>
+  <a href="#composer" class="bottom-nav__create" data-focus-composer aria-label="Create post"><i data-i="plus"></i><span>Create</span></a>
+  <a href="#"><i data-i="bell"></i>Alerts</a>
+  <a href="#" data-auth="account"><i data-i="user"></i>Profile</a>
+</nav>
+
+<div class="modal" id="authModal" hidden>
+  <div class="modal__backdrop" data-close-modal></div>
+  <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="icon-btn modal__close" data-close-modal aria-label="Close"><i data-i="x"></i></button>
+    <div id="authBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* =========================================================
+   ICONS
+   ========================================================= */
+const ICONS = {
+  heart:'<path d="M12 21s-7-4.6-9.3-9A5.3 5.3 0 0 1 12 6.6 5.3 5.3 0 0 1 21.3 12C19 16.4 12 21 12 21z"/>',
+  comment:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+  share:'<path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>',
+  bookmark:'<path d="M6 3h12v18l-6-4-6 4z"/>',
+  dots:'<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/>',
+  pin:'<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>',
+  video:'<rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3z"/>',
+  link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  text:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  palette:'<path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.5-2-.6-1.2.2-2.5 1.6-2.5H17a4 4 0 0 0 4-4c0-5-4-9.5-9-9.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>',
+  play:'<path d="M8 5l12 7-12 7z"/>',
+  send:'<path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  chevL:'<path d="M15 5l-7 7 7 7"/>',
+  chevR:'<path d="M9 5l7 7-7 7"/>'
+};
+const ic = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+document.querySelectorAll('[data-i]').forEach(el => el.outerHTML = ic(el.dataset.i));
+
+/* =========================================================
+   ART (abstract media; swap for real images / Storage URLs)
+   ========================================================= */
+const svg = inner => `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${inner}</svg>`;
+const ART = {
+  logo: svg('<circle cx="200" cy="130" r="58" fill="#0F1226"/><path d="M200 82a48 48 0 0 1 0 96z" fill="#3B3BF5"/><circle cx="200" cy="130" r="20" fill="#FFCF33"/>'),
+  brand: svg('<circle cx="140" cy="130" r="54" fill="#3B3BF5"/><circle cx="205" cy="130" r="54" fill="#FFCF33" style="mix-blend-mode:multiply"/><circle cx="270" cy="130" r="54" fill="#FF9DC6" style="mix-blend-mode:multiply"/>'),
+  ui: svg('<rect x="60" y="30" width="280" height="200" rx="16" fill="#fff"/><rect x="78" y="48" width="64" height="9" rx="4.5" fill="#0F1226"/><rect x="78" y="72" width="244" height="70" rx="12" fill="#FFD9E9"/><rect x="78" y="154" width="118" height="62" rx="12" fill="#DCDDFF"/><rect x="206" y="154" width="116" height="28" rx="12" fill="#CFF5E4"/><rect x="206" y="188" width="116" height="28" rx="12" fill="#0F1226"/>'),
+  travel: svg('<circle cx="290" cy="76" r="32" fill="#FFCF33"/><path d="M0 220 110 96l80 92 70-58 140 110v20H0z" fill="#0F1226"/><path d="M0 244l90-72 80 60 230 28H0z" fill="#3B3BF5"/>'),
+  code: svg('<rect width="400" height="260" fill="#0F1226"/><rect x="40" y="46" width="90" height="10" rx="5" fill="#7B7BFF"/><rect x="60" y="74" width="180" height="10" rx="5" fill="#A8F0D1"/><rect x="60" y="102" width="130" height="10" rx="5" fill="#FF9DC6"/><rect x="80" y="130" width="210" height="10" rx="5" fill="#FFCF33"/><rect x="60" y="158" width="110" height="10" rx="5" fill="#A8F0D1"/><rect x="40" y="186" width="60" height="10" rx="5" fill="#7B7BFF"/>'),
+  photo: svg('<path d="M120 240V130a80 80 0 0 1 160 0v110z" fill="#FF9DC6"/><circle cx="200" cy="118" r="34" fill="#FFCF33"/><rect y="238" width="400" height="22" fill="#0F1226"/>'),
+  food: svg('<circle cx="200" cy="130" r="92" fill="#fff"/><circle cx="200" cy="130" r="66" fill="#FFEFB0"/><circle cx="178" cy="116" r="18" fill="#FF9DC6"/><circle cx="222" cy="108" r="14" fill="#A8F0D1"/><circle cx="212" cy="148" r="20" fill="#3B3BF5"/>'),
+  ai: svg('<circle cx="200" cy="130" r="30" fill="#3B3BF5"/><circle cx="200" cy="130" r="62" fill="none" stroke="#0F1226" stroke-width="3"/><circle cx="200" cy="130" r="98" fill="none" stroke="#0F1226" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/><circle cx="262" cy="130" r="9" fill="#FFCF33"/><circle cx="138" cy="130" r="9" fill="#FF9DC6"/>'),
+  ill: svg('<path d="M60 170c0-70 60-110 120-90s90 70 60 120-140 40-180-30z" fill="#3B3BF5"/><path d="M190 60c50-24 120 6 110 60s-60 50-100 30-50-64-10-90z" fill="#FFCF33" style="mix-blend-mode:multiply"/><circle cx="300" cy="196" r="34" fill="#FF9DC6"/>'),
+  study: svg('<rect x="70" y="60" width="130" height="150" rx="12" fill="#fff"/><rect x="200" y="60" width="130" height="150" rx="12" fill="#DCDDFF"/><rect x="90" y="84" width="80" height="8" rx="4" fill="#0F1226"/><rect x="90" y="106" width="90" height="8" rx="4" fill="#C9CCE0"/><rect x="90" y="124" width="60" height="8" rx="4" fill="#C9CCE0"/><circle cx="265" cy="135" r="30" fill="#3B3BF5"/>')
+};
+const art = (a,bg)=>({k:'art',a,bg});
+const gal = items=>({k:'gallery',items:items.map(([a,bg])=>({a,bg}))});
+const vid = (a,bg,len)=>({k:'video',a,bg,len});
+const lnk = (host,url)=>({k:'link',host,url});
+
+/* =========================================================
+   DATA (replace with Firestore: users, posts, comments)
+   ========================================================= */
+const GROUPS = {
+  Creative:['Graphic Design','Logo Design','Branding','UI/UX Design','Web Design','Illustration','Photography','Video','Animation'],
+  Technology:['Web Development','App Development','AI','Software','Programming','Cybersecurity','Tools'],
+  Business:['Business','Startup','Marketing','Sales','Freelancing','Entrepreneurship'],
+  Lifestyle:['Travel','Food','Fitness','Fashion','Events','Hobbies'],
+  Learning:['Education','Courses','Skills','Career','Books','Tutorials'],
+  Professional:['Work Experience','Projects','Portfolio','Client Experience','Job Experience'],
+  Other:['Other']
+};
+const slug = s => s.toLowerCase().replace(/[^a-z]/g,'');
+const tagsFor = (group,sub) => [...new Set([group.toLowerCase(), slug(sub), ...(group==='Creative'?['design']:[])])];
+
+const CHIPS = [['All','all'],['Design','design'],['Technology','technology'],['Travel','travel'],['Business','business'],['Photography','photography'],['AI','ai'],['Lifestyle','lifestyle']];
+
+const USERS = {
+  you:{n:'You',role:'Creator',c:'#FFCF33',f:0},
+  aarav:{n:'Aarav Mehta',role:'Brand designer, Ahmedabad',c:'#DCDDFF',f:2400},
+  sana:{n:'Sana Iyer',role:'UI/UX designer, Bengaluru',c:'#A8F0D1',f:1800},
+  kabir:{n:'Kabir Rao',role:'Frontend developer, Pune',c:'#FFEFB0',f:960},
+  meera:{n:'Meera Shah',role:'Photographer, Jaipur',c:'#FFD9E9',f:3100},
+  noah:{n:'Noah Ellis',role:'Travel creator, Lisbon',c:'#FFDCC8',f:5200},
+  lena:{n:'Lena Park',role:'Bakery owner, Seoul',c:'#DCDDFF',f:740},
+  dev:{n:'Dev Malhotra',role:'Freelance copywriter, Delhi',c:'#A8F0D1',f:1200},
+  ivy:{n:'Ivy Chen',role:'Design student, Singapore',c:'#FFEFB0',f:420}
+};
+const initials = n => n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const following = new Set(['aarav','sana','noah']);
+
+// h = hours ago | l,c,s,sv = likes, comments, shares, saves
+const POSTS = [
+ {id:1,u:'aarav',h:2,group:'Creative',cat:'Logo Design',title:'My first brand identity project',d:'I recently completed a complete identity system for a small startup. The biggest challenge was creating something simple but memorable.',m:art('logo','#FFEFB0'),l:125,c:24,s:18,sv:40},
+ {id:2,u:'sana',h:5,group:'Creative',cat:'UI/UX Design',title:'Cutting a checkout flow to three taps',d:'We removed two screens and one form field. Conversions rose and support tickets dropped.',m:gal([['ui','#DCDDFF'],['brand','#FFD9E9'],['logo','#A8F0D1']]),l:342,c:61,s:44,sv:120},
+ {id:3,u:'noah',h:9,group:'Lifestyle',cat:'Travel',title:'My weekend travel experience',d:'A short trip, beautiful places and some lessons I learned about packing light.',m:art('travel','#FFDCC8'),loc:'Sintra, Portugal',l:812,c:96,s:150,sv:340},
+ {id:4,u:'kabir',h:14,group:'Technology',cat:'Web Development',title:'Building my first React project',d:'Here is what I learned while building my first production-style React application.',m:vid('code','#0F1226','4:12'),l:210,c:38,s:22,sv:95},
+ {id:5,u:'meera',h:20,group:'Creative',cat:'Photography',title:'One hour of golden light',d:'Same street, same hour, seven days in a row. Here is what changed.',m:art('photo','#DCDDFF'),l:640,c:52,s:71,sv:210},
+ {id:6,u:'dev',h:26,group:'Business',cat:'Freelancing',title:'The client I under-priced',exp:['I dropped my rate for a client I really liked.','Unclear scope costs more than a lower price ever saves.','Quote per project and write down what is included.'],l:88,c:31,s:9,sv:44},
+ {id:7,u:'sana',h:30,group:'Technology',cat:'AI',title:'Using an AI assistant in my design process',d:'It is great for options and poor at taste. My rules for when to ask and when to ignore it.',m:art('ai','#A8F0D1'),l:455,c:83,s:66,sv:190},
+ {id:8,u:'lena',h:36,group:'Lifestyle',cat:'Food',title:'What our first 100 customers taught us',d:'We opened a tiny bakery. The best idea came from a complaint on day three.',m:art('food','#FFD9E9'),l:298,c:47,s:35,sv:88},
+ {id:9,u:'ivy',h:44,group:'Learning',cat:'Tutorials',title:'30 days of CSS, one small thing a day',d:'Grid finally made sense on day nine. Notes, demos and the mistakes I keep making.',m:lnk('codepen.io','codepen.io/ivy/30-days-of-css'),l:176,c:29,s:14,sv:132},
+ {id:10,u:'aarav',h:52,group:'Creative',cat:'Branding',title:'Choosing colours for a brand with no colour',d:'The client wanted neutral. We found three shades that felt like them.',m:art('brand','#FFDCC8'),l:190,c:20,s:12,sv:60},
+ {id:11,u:'meera',h:60,group:'Creative',cat:'Illustration',title:'Drawing with shapes only',d:'A week without lines. Blobs, circles and one very stubborn triangle.',m:gal([['ill','#FFEFB0'],['photo','#DCDDFF']]),l:520,c:44,s:40,sv:150},
+ {id:12,u:'noah',h:72,group:'Lifestyle',cat:'Travel',title:'A street food trail in Porto',d:'Nine stops, one afternoon, and a list of what I would skip next time.',m:art('food','#A8F0D1'),loc:'Porto, Portugal',l:377,c:41,s:52,sv:170},
+ {id:13,u:'kabir',h:80,group:'Technology',cat:'Programming',title:'Why I stopped over-engineering side projects',d:'Three rewrites taught me one rule: ship the ugly version first.',m:art('code','#0F1226'),l:301,c:57,s:33,sv:140},
+ {id:14,u:'dev',h:90,group:'Technology',cat:'Tools',title:'The five tools I actually use every week',d:'I tried thirty. These five survived the month.',m:lnk('notion.so','notion.so/dev/weekly-tools'),l:263,c:36,s:28,sv:118},
+ {id:15,u:'lena',h:100,group:'Lifestyle',cat:'Fitness',title:'Ten minutes every morning',d:'Not a challenge, just a habit. What stuck and what quietly stopped.',m:art('ill','#FFD9E9'),l:144,c:22,s:10,sv:71},
+ {id:16,u:'aarav',h:110,group:'Creative',cat:'Video',title:'Editing a 60-second brand film',d:'Shot on a phone, cut in one weekend. What I would storyboard first next time.',m:vid('ill','#DCDDFF','1:04'),l:233,c:27,s:19,sv:64},
+ {id:17,u:'sana',h:120,group:'Creative',cat:'Animation',title:'Animating a logo in twelve frames',d:'Small motion, big personality. The easing curve did most of the work.',m:gal([['logo','#A8F0D1'],['brand','#FFEFB0']]),l:389,c:35,s:41,sv:102},
+ {id:18,u:'dev',h:130,group:'Business',cat:'Startup',title:'What I would cut from an MVP',exp:['We shipped with nine features and users touched two.','Most of the list was fear, not evidence.','Ship the two, then ask people what is missing.'],l:167,c:28,s:15,sv:73},
+ {id:19,u:'noah',h:140,group:'Business',cat:'Marketing',title:'A newsletter with forty subscribers',d:'Forty people who replied beat four thousand who did not. Notes from the first ten issues.',m:art('brand','#FFEFB0'),l:204,c:33,s:21,sv:80},
+ {id:20,u:'ivy',h:150,group:'Learning',cat:'Books',title:'Three design books worth rereading',d:'I read each one twice. The second read was the one that changed how I work.',m:art('study','#FFD9E9'),l:158,c:19,s:11,sv:97},
+ {id:21,u:'kabir',h:160,group:'Technology',cat:'Cybersecurity',title:'Why I finally turned on two-factor everywhere',d:'It took twenty minutes. A phishing email the next week made it worth it.',m:art('code','#0F1226'),l:412,c:64,s:88,sv:205},
+ {id:22,u:'meera',h:170,group:'Creative',cat:'Graphic Design',title:'A poster in one evening',d:'Three shapes, two colours, one deadline. The constraint helped.',m:art('ill','#FFDCC8'),l:281,c:26,s:24,sv:90},
+ {id:23,u:'ivy',h:180,group:'Learning',cat:'Career',title:'My first design interview',d:'I over-prepared the portfolio and under-prepared the questions. Here is my list for next time.',l:119,c:34,s:8,sv:66}
+];
+POSTS.forEach(p=>p.tags = tagsFor(p.group,p.cat));
+const byId = id => POSTS.find(p=>p.id===id);
+
+const SEED_COMMENTS = [
+  {u:'sana',t:'This is so clear. Thanks for sharing the process, not just the result.',h:1,likes:4},
+  {u:'kabir',t:'Saving this for later. The last point is the one I needed.',h:2,likes:2},
+  {u:'meera',t:'Love the honesty here. More posts like this please.',h:3,likes:6},
+  {u:'noah',t:'Would you do anything differently a second time?',h:5,likes:1}
+];
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const $ = (s,r=document) => r.querySelector(s);
+const $$ = (s,r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => n>=1000 ? (n/1000).toFixed(n>=10000?0:1).replace('.0','')+'K' : String(n);
+const ago = h => h<1 ? 'Just now' : h<24 ? h+'h ago' : Math.floor(h/24)+'d ago';
+/* trending: score = likes*1 + comments*2 + shares*3 + saves*2, then time decay */
+const score = p => (p.l + p.c*2 + p.s*3 + p.sv*2) / Math.pow(p.h + 2, 1.25);
+const avatar = (id,cls='') => `<span class="avatar ${cls}" style="background:${USERS[id].c}">${initials(USERS[id].n)}</span>`;
+let me = null; // logged-in user (demo). Replace with Firebase Auth user.
+const handle = id => id==='you' ? (me?.username || 'you') : id;
+const postUrl = p => 'https://example.com/experience/' + (p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''));
+
+const toastEl = $('#toast'); let tt;
+function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('is-show'); clearTimeout(tt); tt = setTimeout(()=>toastEl.classList.remove('is-show'),2400); }
+
+/* =========================================================
+   POST CARD
+   ========================================================= */
+const liked = new Set(), saved = new Set();
+
+function mediaHTML(p){
+  const m = p.m; if(!m) return '';
+  if(m.k==='art') return `<div class="post-card__media" style="background:${m.bg}" role="img" aria-label="${esc(p.title)}">${ART[m.a]}</div>`;
+  if(m.k==='video') return `<div class="post-card__media" style="background:${m.bg}" role="img" aria-label="Video: ${esc(p.title)}">${ART[m.a]}<div class="play"><span>${ic('play')}</span><em>${m.len}</em></div></div>`;
+  if(m.k==='gallery') return `<div class="gallery gallery--${m.items.length}" role="group" aria-label="Gallery: ${esc(p.title)}">${m.items.map(i=>`<div class="gallery__item" style="background:${i.bg}">${ART[i.a]}</div>`).join('')}</div>`;
+  if(m.k==='files') return `<div class="gallery gallery--${Math.min(m.items.length,4)}">${m.items.slice(0,4).map(i=> i.video
+      ? `<div class="gallery__item"><video src="${i.url}" controls preload="metadata"></video></div>`
+      : `<div class="gallery__item"><img src="${i.url}" alt="${esc(p.title)}" loading="lazy"></div>`).join('')}</div>`;
+  if(m.k==='link') return `<div class="link-card"><span class="link-card__icon">${ic('link')}</span><div><strong>${esc(m.host)}</strong><span>${esc(m.url)}</span></div></div>`;
+  return '';
+}
+function statsHTML(p){
+  return `<span>${ic('heart')}${fmt(p.l)} Likes</span><span>${ic('comment')}${fmt(p.c)} Comments</span><span>${ic('share')}${fmt(p.s)} Shares</span>`;
+}
+function postCard(p,isNew){
+  const u = USERS[p.u];
+  const exp = p.exp ? `<div class="exp">
+      <div class="exp__item"><b>What happened?</b><span>${esc(p.exp[0])}</span></div>
+      <div class="exp__item"><b>What did I learn?</b><span>${esc(p.exp[1])}</span></div>
+      <div class="exp__item"><b>What would I recommend?</b><span>${esc(p.exp[2])}</span></div></div>` : '';
+  const url = encodeURIComponent(postUrl(p)), txt = encodeURIComponent(p.title);
+  return `<article class="post-card ${isNew?'is-new':''}" data-id="${p.id}">
+    <header class="post-card__header">
+      ${avatar(p.u)}
+      <div class="post-card__author"><strong>${esc(u.n)}</strong><span>@${handle(p.u)}</span></div>
+      <time class="post-card__time">${ago(p.h)}</time>
+      <button class="icon-btn post-card__more" data-more aria-label="More options" aria-haspopup="menu">${ic('dots')}</button>
+      <div class="menu menu--more" role="menu"><button role="menuitem" data-report>Report</button><button role="menuitem" data-copy>Copy link</button></div>
+    </header>
+    <div class="post-card__meta"><span class="badge">${esc(p.cat)}</span>${p.loc?`<span class="post-card__place">${ic('pin')}${esc(p.loc)}</span>`:''}</div>
+    <h3 class="post-card__title">${esc(p.title)}</h3>
+    ${p.d?`<p class="post-card__content">${esc(p.d)}</p>`:''}
+    ${exp}${mediaHTML(p)}
+    <div class="post-card__stats" data-stats>${statsHTML(p)}</div>
+    <div class="post-card__actions">
+      <button class="action ${liked.has(p.id)?'is-on':''}" data-like aria-pressed="${liked.has(p.id)}">${ic('heart')}<span>Like</span></button>
+      <button class="action" data-comment>${ic('comment')}<span>Comment</span></button>
+      <button class="action" data-share aria-haspopup="menu">${ic('share')}<span>Share</span></button>
+      <button class="action ${saved.has(p.id)?'is-on':''}" data-save aria-pressed="${saved.has(p.id)}">${ic('bookmark')}<span>Save</span></button>
+      <div class="menu menu--share" role="menu">
+        <button role="menuitem" data-copy>Copy link</button>
+        <a role="menuitem" target="_blank" rel="noopener" href="https://wa.me/?text=${txt}%20${url}">WhatsApp</a>
+        <a role="menuitem" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=${url}">Facebook</a>
+        <a role="menuitem" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=${url}">LinkedIn</a>
+        <a role="menuitem" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${txt}&url=${url}">X</a>
+      </div>
+    </div>
+    <section class="comments" data-comments aria-label="Comments"></section>
+  </article>`;
+}
+
+/* comments */
+function commentHTML(cm){
+  return `<div class="comment">
+    ${avatar(cm.u,'avatar--sm')}
+    <div><div class="comment__bubble"><strong>@${handle(cm.u)}</strong><p>${esc(cm.t)}</p></div>
+      <div class="comment__meta"><span>${ago(cm.h)}</span><button data-clike>${cm.likes?cm.likes+' ':''}Like</button><button data-reply="${handle(cm.u)}">Reply</button></div></div>
+  </div>`;
+}
+function openComments(card,p){
+  const box = $('[data-comments]',card);
+  if(!p.cm) p.cm = SEED_COMMENTS.filter(c=>c.u!==p.u).slice(0,2).map(c=>({...c}));
+  box.innerHTML = p.cm.map(commentHTML).join('') + `<div class="comment-form">${avatar('you','avatar--sm')}<input type="text" placeholder="Write a comment..." aria-label="Write a comment"><button class="icon-btn" data-send aria-label="Post comment">${ic('send')}</button></div>`;
+  box.classList.add('is-open');
+  $('input',box).focus();
+}
+
+/* =========================================================
+   FEED (tabs, chips, search, infinite scroll)
+   ========================================================= */
+let tab='latest', chip=null, query='', shown=5, ready=false;
+const ALL_CATS = Object.values(GROUPS).flat();
+
+/* horizontal scroller: swipe on touch, drag with mouse, prev/next arrows when there is more to see */
+function makeScroller(el){
+  const wrap = document.createElement('div'); wrap.className = 'scroller';
+  el.parentNode.insertBefore(wrap, el); wrap.append(el);
+  wrap.insertAdjacentHTML('afterbegin', `<button class="scroller__btn scroller__btn--prev" aria-label="Scroll left" hidden>${ic('chevL')}</button>`);
+  wrap.insertAdjacentHTML('beforeend', `<button class="scroller__btn scroller__btn--next" aria-label="Scroll right" hidden>${ic('chevR')}</button>`);
+  const prev = $('.scroller__btn--prev',wrap), next = $('.scroller__btn--next',wrap);
+  const update = () => {
+    const max = el.scrollWidth - el.clientWidth;
+    const hasPrev = el.scrollLeft > 8, hasNext = el.scrollLeft < max - 8;
+    prev.hidden = !hasPrev; next.hidden = !hasNext;
+    wrap.classList.toggle('has-prev',hasPrev); wrap.classList.toggle('has-next',hasNext);
+  };
+  el.addEventListener('scroll',update,{passive:true});
+  new ResizeObserver(update).observe(el);
+  prev.addEventListener('click',()=>el.scrollBy({left:-el.clientWidth*.7,behavior:'smooth'}));
+  next.addEventListener('click',()=>el.scrollBy({left:el.clientWidth*.7,behavior:'smooth'}));
+  let down=false, moved=false, sx=0, sl=0;
+  el.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; down=true; moved=false; sx=e.clientX; sl=el.scrollLeft; });
+  window.addEventListener('pointermove',e=>{ if(!down) return; const dx=e.clientX-sx; if(Math.abs(dx)>5){ moved=true; el.classList.add('is-dragging'); } if(moved) el.scrollLeft = sl-dx; });
+  window.addEventListener('pointerup',()=>{ down=false; el.classList.remove('is-dragging'); });
+  el.addEventListener('click',e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); moved=false; } },true);
+  return () => requestAnimationFrame(update);
+}
+const tabsScroll = makeScroller($('#tabs'));
+const chipsScroll = makeScroller($('#chips'));
+
+function renderTabs(){
+  const tabs = [...(me?[['foryou','For you']]:[]),['latest','Latest'],['creative','Creative'],['trending','Trending'],['following','Following']];
+  if(!tabs.some(t=>t[0]===tab)) tab = 'latest';
+  $('#tabs').innerHTML = tabs.map(([k,l])=>`<button class="tab ${k===tab?'is-active':''}" data-tab="${k}" role="tab" aria-selected="${k===tab}">${l}</button>`).join('');
+  tabsScroll();
+}
+/* category tabs: your picks first, then categories that have posts, then the rest */
+function catOrder(){
+  const mine = me?.cats || [];
+  const used = new Set(POSTS.map(p=>p.cat));
+  const rest = ALL_CATS.filter(c=>!mine.includes(c));
+  return [...mine, ...rest.filter(c=>used.has(c)), ...rest.filter(c=>!used.has(c))];
+}
+function renderChips(){
+  const mine = new Set(me?.cats || []);
+  $('#chips').innerHTML = (me?`<button class="chip chip--edit" data-edit-cats>${ic('plus')}Edit</button>`:'')
+    + catOrder().map(c=>`<button class="chip ${mine.has(c)?'chip--mine':''} ${c===chip?'is-active':''}" data-chip="${esc(c)}" aria-pressed="${c===chip}">${esc(c)}</button>`).join('');
+  chipsScroll();
+}
+function emptyHTML(){
+  if(query) return `<div class="feed__empty">Nothing matches "${esc(query)}". Try another word.</div>`;
+  if(tab==='following') return `<div class="feed__empty">Follow a few people and their experiences will show up here.</div>`;
+  if(tab==='foryou') return `<div class="feed__empty">No posts in your categories yet.<br><br><button class="btn btn--ghost btn--sm" data-edit-cats>Edit categories</button></div>`;
+  if(chip) return `<div class="feed__empty">No experiences in ${esc(chip)} yet.<br><br><button class="btn btn--primary btn--sm" data-share-first="${esc(chip)}">Share the first one</button></div>`;
+  return `<div class="feed__empty">No experiences found. Be the first to share one here.</div>`;
+}
+renderTabs(); renderChips();
+
+function visible(){
+  let list = [...POSTS];
+  if(tab==='foryou') list = list.filter(p=>(me?.cats||[]).includes(p.cat) || p.u==='you');
+  if(tab==='latest' || tab==='foryou') list.sort((a,b)=>a.h-b.h);
+  if(tab==='trending') list.sort((a,b)=>score(b)-score(a));
+  if(tab==='creative') list = list.filter(p=>p.tags.includes('creative'));
+  if(tab==='following') list = list.filter(p=>following.has(p.u));
+  if(chip) list = list.filter(p=>p.cat===chip);
+  if(query){ const q=query.toLowerCase(); list = list.filter(p=>(p.title+' '+(p.d||'')+' '+p.cat+' '+USERS[p.u].n).toLowerCase().includes(q)); }
+  return list;
+}
+function skeleton(){
+  return Array.from({length:3},()=>`<div class="post-card skeleton" aria-hidden="true">
+    <div style="display:flex;gap:12px;align-items:center"><div class="sk" style="width:46px;height:46px;border-radius:50%"></div><div style="flex:1;display:grid;gap:8px"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:10px;width:24%"></div></div></div>
+    <div class="sk" style="height:22px;width:70%"></div><div class="sk" style="height:14px"></div><div class="sk" style="height:220px;border-radius:16px"></div></div>`).join('');
+}
+function renderFeed(newId){
+  const list = visible();
+  $('#feed').innerHTML = list.length
+    ? list.slice(0,shown).map(p=>postCard(p,p.id===newId)).join('')
+    : emptyHTML();
+  $('#more').hidden = list.length<=shown;
+}
+$('#feed').innerHTML = skeleton();
+setTimeout(()=>{ ready=true; renderFeed(); },500);
+
+function loadMore(){ if(!ready||$('#more').hidden) return; shown += 4; renderFeed(); }
+$('#more').addEventListener('click',loadMore);
+new IntersectionObserver(es=>{ if(es[0].isIntersecting) loadMore(); },{rootMargin:'400px'}).observe($('#sentinel'));
+
+$('#search').addEventListener('input',e=>{ query=e.target.value.trim(); shown=5; renderFeed(); });
+
+/* =========================================================
+   RIGHT RAIL
+   ========================================================= */
+function renderTrending(){
+  $('#trending').innerHTML = [...POSTS].sort((a,b)=>score(b)-score(a)).slice(0,4).map((p,i)=>`
+    <div class="trend"><span class="trend__rank">${i+1}</span><div><strong>${esc(p.title)}</strong><span>${esc(USERS[p.u].n)}, ${esc(p.cat)}</span></div></div>`).join('');
+}
+function renderWho(){
+  $('#who').innerHTML = ['kabir','meera','lena'].map(id=>`
+    <div class="who">${avatar(id)}<div class="who__info"><strong>${USERS[id].n}</strong><span>${fmt(USERS[id].f)} followers</span></div>
+      <button class="btn btn--sm ${following.has(id)?'is-on':'btn--ink'}" data-follow="${id}">${following.has(id)?'Following':'Follow'}</button></div>`).join('');
+}
+renderTrending(); renderWho();
+
+/* =========================================================
+   COMPOSER
+   ========================================================= */
+const TYPES = [
+  ['text','Text','text','#DCDDFF'],['image','Image','image','#FFEFB0'],['video','Video','video','#FFD9E9'],
+  ['link','Link','link','#A8F0D1'],['experience','Experience','star','#FFDCC8'],['creative','Creative','palette','#DCDDFF']
+];
+let ctype='text', files=[];
+$('#types').innerHTML = TYPES.map(([k,l,i,c])=>`<button class="type ${k==='text'?'is-active':''}" data-type="${k}" aria-pressed="${k==='text'}"><span class="type__dot" style="background:${c}">${ic(i)}</span>${l}</button>`).join('');
+$('#cCat').innerHTML = `<option value="" disabled selected>Choose a category</option>` + Object.entries(GROUPS).map(([g,subs])=>`<optgroup label="${g}">${subs.map(s=>`<option value="${s}">${s}</option>`).join('')}</optgroup>`).join('');
+
+function applyType(){
+  $$('#composer [data-for]').forEach(el=>el.classList.toggle('is-shown', el.dataset.for.split(' ').includes(ctype)));
+  $$('.type').forEach(b=>{ const on=b.dataset.type===ctype; b.classList.toggle('is-active',on); b.setAttribute('aria-pressed',on); });
+  $('#cFiles').accept = ctype==='video' ? 'video/*' : ctype==='image' ? 'image/*' : 'image/*,video/*';
+}
+applyType();
+
+$('#cFiles').addEventListener('change',e=>{
+  files = [...e.target.files].slice(0,4).map(f=>({url:URL.createObjectURL(f),video:f.type.startsWith('video')}));
+  $('#thumbs').innerHTML = files.map(f=> f.video ? `<video src="${f.url}" muted></video>` : `<img src="${f.url}" alt="">`).join('');
+  $('#uploadHint').textContent = files.length ? files.length+' file'+(files.length>1?'s':'')+' ready' : 'Upload images or a video. Nothing leaves your browser in this demo.';
+});
+
+function resetComposer(){
+  ['#cTitle','#cStory','#cUrl','#e1','#e2','#e3'].forEach(s=>$(s).value='');
+  $('#cCat').selectedIndex = 0; $('#cFiles').value=''; files=[]; $('#thumbs').innerHTML=''; $('#uploadHint').textContent='Upload images or a video. Nothing leaves your browser in this demo.';
+}
+
+$('#publish').addEventListener('click',()=>{
+  if(!me){ toast('Create a free account to publish'); return openAuth('register'); }
+  const title = $('#cTitle').value.trim(), story = $('#cStory').value.trim(), catSel = $('#cCat');
+  if(!title) return toast('Add a title first'), $('#cTitle').focus();
+  if(!catSel.value) return toast('Choose a category'), catSel.focus();
+  const sub = catSel.value, group = catSel.selectedOptions[0].parentElement.label;
+  const p = {id:Date.now(),u:'you',h:0,group,cat:sub,title,l:0,c:0,s:0,sv:0,tags:tagsFor(group,sub)};
+
+  if(ctype==='experience'){
+    const e = ['#e1','#e2','#e3'].map(s=>$(s).value.trim());
+    if(!e[0]) return toast('Tell us what happened'), $('#e1').focus();
+    p.exp = e.map((v,i)=>v || ['Not shared','Not shared','Not shared'][i]);
+  } else {
+    if(!story && ctype!=='link') return toast('Tell your story'), $('#cStory').focus();
+    p.d = story;
+  }
+  if(ctype==='link'){
+    const raw = $('#cUrl').value.trim();
+    try{ const u = new URL(raw); p.m = lnk(u.hostname.replace(/^www\./,''), raw); }
+    catch{ return toast('Enter a valid link, starting with https://'), $('#cUrl').focus(); }
+  }
+  if(['image','video','creative'].includes(ctype)){
+    if(!files.length && ctype!=='creative') return toast('Add a photo or video first');
+    if(files.length) p.m = {k:'files',items:files};
+  }
+  POSTS.unshift(p);
+  resetComposer(); tab='latest'; chip=null; query=''; $('#search').value=''; shown=5;
+  renderTabs(); renderChips(); renderFeed(p.id); renderTrending();
+  toast('Published');
+  $('#filters').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+function closeMenus(except){ $$('.menu.is-open').forEach(m=>{ if(m!==except) m.classList.remove('is-open'); }); }
+
+document.addEventListener('click',e=>{
+  const authEl = e.target.closest('[data-auth]');
+  if(authEl){
+    e.preventDefault();
+    if(authEl.dataset.auth==='account' && me){ const m=$('#meMenu'); closeMenus(m); m.classList.toggle('is-open'); }
+    else openAuth(authEl.dataset.auth==='account' ? 'login' : authEl.dataset.auth);
+    return;
+  }
+  if(e.target.closest('[data-close-modal]')){ closeAuth(); return; }
+  const focusLink = e.target.closest('[data-focus-composer]');
+  if(focusLink){ e.preventDefault(); $('#composer').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>$('#cTitle').focus({preventScroll:true}),350); return; }
+
+  const t = e.target.closest('button, a[role="menuitem"]');
+  if(!e.target.closest('.menu') && !(t && (t.hasAttribute('data-more')||t.hasAttribute('data-share')))) closeMenus();
+  if(!t) return;
+
+  const card = t.closest('.post-card');
+  const p = card && byId(+card.dataset.id);
+  const refresh = () => { $('[data-stats]',card).innerHTML = statsHTML(p); };
+
+  if(t.hasAttribute('data-like')){
+    const on = !liked.has(p.id); on ? liked.add(p.id) : liked.delete(p.id);
+    p.l += on?1:-1; t.classList.toggle('is-on',on); t.setAttribute('aria-pressed',on);
+    t.classList.remove('pop'); void t.offsetWidth; if(on) t.classList.add('pop'); refresh(); renderTrending();
+  }
+  else if(t.hasAttribute('data-save')){
+    const on = !saved.has(p.id); on ? saved.add(p.id) : saved.delete(p.id);
+    p.sv += on?1:-1; t.classList.toggle('is-on',on); t.setAttribute('aria-pressed',on); toast(on?'Saved':'Removed from saved');
+  }
+  else if(t.hasAttribute('data-share')){
+    if(navigator.share && matchMedia('(pointer:coarse)').matches){
+      navigator.share({title:p.title,url:postUrl(p)}).then(()=>{p.s++;refresh();}).catch(()=>{});
+    } else { const m=$('.menu--share',card); closeMenus(m); m.classList.toggle('is-open'); }
+  }
+  else if(t.hasAttribute('data-copy')){
+    navigator.clipboard?.writeText(postUrl(p)); p.s++; refresh(); closeMenus(); toast('Link copied');
+  }
+  else if(t.closest('.menu--share') && t.tagName==='A'){ p.s++; refresh(); closeMenus(); }
+  else if(t.hasAttribute('data-more')){ const m=$('.menu--more',card); closeMenus(m); m.classList.toggle('is-open'); }
+  else if(t.hasAttribute('data-report')){ closeMenus(); toast('Report sent. Thanks for keeping this place kind.'); }
+  else if(t.hasAttribute('data-comment')){
+    const box=$('[data-comments]',card);
+    box.classList.contains('is-open') ? box.classList.remove('is-open') : openComments(card,p);
+  }
+  else if(t.hasAttribute('data-send')){ postComment(card,p); }
+  else if(t.hasAttribute('data-clike')){ t.classList.toggle('is-on'); }
+  else if(t.dataset.reply){ const i=$('.comment-form input',card); i.value='@'+t.dataset.reply+' '; i.focus(); }
+  else if(t.hasAttribute('data-edit-cats')){ closeMenus(); openAuth('cats'); }
+  else if(t.hasAttribute('data-logout')){ logout(); }
+  else if(t.dataset.shareFirst){
+    $('#cCat').value = t.dataset.shareFirst;
+    $('#composer').scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>$('#cTitle').focus({preventScroll:true}),350);
+  }
+  else if(t.dataset.tab){
+    tab=t.dataset.tab; shown=5;
+    $$('.tab').forEach(x=>{ const on=x===t; x.classList.toggle('is-active',on); x.setAttribute('aria-selected',on); });
+    renderFeed();
+  }
+  else if(t.dataset.chip){
+    chip = (chip===t.dataset.chip) ? null : t.dataset.chip; shown=5;
+    $$('[data-chip]').forEach(x=>{ const on=x.dataset.chip===chip; x.classList.toggle('is-active',on); x.setAttribute('aria-pressed',on); });
+    renderFeed();
+  }
+  else if(t.dataset.type){ ctype=t.dataset.type; files=[]; $('#cFiles').value=''; $('#thumbs').innerHTML=''; applyType(); }
+  else if(t.dataset.follow){
+    const id=t.dataset.follow; following.has(id)?following.delete(id):following.add(id);
+    renderWho(); if(tab==='following') renderFeed();
+  }
+});
+
+function postComment(card,p){
+  const input = $('.comment-form input',card), v = input.value.trim();
+  if(!v) return;
+  p.cm.push({u:'you',t:v,h:0,likes:0}); p.c++;
+  $('[data-stats]',card).innerHTML = statsHTML(p);
+  $('.comment-form',card).insertAdjacentHTML('beforebegin',commentHTML(p.cm[p.cm.length-1]));
+  input.value=''; input.focus();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && e.target.matches('.comment-form input')){ const card=e.target.closest('.post-card'); postComment(card,byId(+card.dataset.id)); }
+  if(e.key==='Escape'){ closeMenus(); if(!modal.hidden) closeAuth(); }
+});
+
+/* =========================================================
+   AUTH (demo only: swap for Firebase Auth + Firestore users)
+   ========================================================= */
+const LS_KEY = 'livedin_demo_user', MIN_PICKS = 3;
+const modal = $('#authModal');
+let draft = {}, picks = new Set();
+const saveMe = () => { try{ me ? localStorage.setItem(LS_KEY,JSON.stringify(me)) : localStorage.removeItem(LS_KEY); }catch{} };
+try{ me = JSON.parse(localStorage.getItem(LS_KEY)) || null; }catch{ me = null; }
+
+function applyMe(){
+  const logged = !!me;
+  $('#loginBtn').hidden = logged; $('#joinBtn').hidden = logged; $('#meBtn').hidden = !logged;
+  if(logged){
+    USERS.you.n = me.name;
+    $('#meBtn').innerHTML = `<span class="avatar avatar--sm" style="background:${USERS.you.c}">${initials(me.name)}</span>`;
+    $('#cAvatar').textContent = initials(me.name);
+    $('#meMenu').innerHTML = `<div class="who-me"><strong>${esc(me.name)}</strong><span>@${esc(me.username)}</span></div>
+      <button role="menuitem" data-edit-cats>Edit categories</button>
+      <button role="menuitem" data-logout>Log out</button>`;
+  } else {
+    USERS.you.n = 'You'; $('#cAvatar').textContent = 'YO'; $('#meMenu').innerHTML = '';
+  }
+  renderTabs(); renderChips();
+}
+function openAuth(mode){
+  picks = new Set(me?.cats || []);
+  modal.hidden = false; document.body.style.overflow = 'hidden';
+  if(mode==='cats' && !me) mode = 'register';
+  renderAuth(mode);
+}
+function closeAuth(){ modal.hidden = true; document.body.style.overflow = ''; }
+
+function renderAuth(step){
+  const body = $('#authBody');
+  if(step==='register') body.innerHTML = `
+    <h2 id="authTitle">Create your free account</h2>
+    <p class="modal__sub">Share your experiences, ideas and projects. Posting is always free.</p>
+    <form class="auth-form" id="regForm" novalidate>
+      <div class="field"><label for="rName">Full name</label><input id="rName" autocomplete="name"></div>
+      <div class="field-row">
+        <div class="field"><label for="rUser">Username</label><input id="rUser" autocomplete="username" placeholder="yourname"></div>
+        <div class="field"><label for="rMail">Email</label><input id="rMail" type="email" autocomplete="email"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="rPass">Password</label><input id="rPass" type="password" autocomplete="new-password"></div>
+        <div class="field"><label for="rPass2">Confirm password</label><input id="rPass2" type="password" autocomplete="new-password"></div>
+      </div>
+      <p class="auth-error" id="authErr" role="alert"></p>
+      <button class="btn btn--primary" type="submit">Continue</button>
+      <div class="divider">or</div>
+      <button class="btn btn--ghost" type="button" data-google>Continue with Google</button>
+    </form>
+    <p class="auth-switch">Already have an account? <button data-switch="login">Log in</button></p>
+    <p class="auth-note">Demo only. Connect Firebase Authentication to make sign-up real.</p>`;
+  else if(step==='login') body.innerHTML = `
+    <h2 id="authTitle">Welcome back</h2>
+    <p class="modal__sub">Log in to publish, follow people and get a feed made from your categories.</p>
+    <form class="auth-form" id="loginForm" novalidate>
+      <div class="field"><label for="lMail">Email</label><input id="lMail" type="email" autocomplete="email"></div>
+      <div class="field"><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password"></div>
+      <p class="auth-error" id="authErr" role="alert"></p>
+      <button class="btn btn--primary" type="submit">Log in</button>
+      <button class="btn btn--ghost" type="button" data-forgot>Forgot password?</button>
+      <div class="divider">or</div>
+      <button class="btn btn--ghost" type="button" data-google>Continue with Google</button>
+    </form>
+    <p class="auth-switch">New here? <button data-switch="register">Create an account</button></p>
+    <p class="auth-note">Demo only. Connect Firebase Authentication to make login real.</p>`;
+  else renderPicks();
+  setTimeout(()=>$('#authBody input')?.focus(),50);
+}
+
+function renderPicks(){
+  const editing = !!me, n = picks.size;
+  $('#authBody').innerHTML = `
+    <h2 id="authTitle">${editing?'Edit your categories':'Pick what you love'}</h2>
+    <p class="modal__sub">Choose at least ${MIN_PICKS}. They power your For you feed and show first in the category tabs.</p>
+    <div class="picks">${Object.entries(GROUPS).filter(([g])=>g!=='Other').map(([g,subs])=>`
+      <div><h3>${g}</h3><div class="picks__list">${subs.map(s=>`<button type="button" class="pick ${picks.has(s)?'is-on':''}" data-pick="${esc(s)}" aria-pressed="${picks.has(s)}">${esc(s)}</button>`).join('')}</div></div>`).join('')}</div>
+    <div class="picks-foot"><span id="pickCount">${n} selected</span>
+      <button class="btn btn--primary" data-finish ${n>=MIN_PICKS?'':'disabled'}>${editing?'Save categories':'Finish'}</button></div>`;
+}
+
+function finishAuth(){
+  if(picks.size < MIN_PICKS) return;
+  const editing = !!me, cats = [...picks];
+  me = editing ? {...me, cats} : {...draft, cats};
+  saveMe(); closeAuth();
+  tab = 'foryou'; chip = null; shown = 5;
+  applyMe(); renderFeed();
+  toast(editing ? 'Categories saved' : 'Welcome, ' + me.name.split(' ')[0]);
+}
+function logout(){
+  me = null; saveMe(); closeMenus(); tab = 'latest'; chip = null;
+  applyMe(); renderFeed(); toast('Logged out');
+}
+
+modal.addEventListener('click',e=>{
+  const t = e.target.closest('button'); if(!t) return;
+  if(t.dataset.switch) renderAuth(t.dataset.switch);
+  else if(t.dataset.pick){
+    const c = t.dataset.pick; picks.has(c) ? picks.delete(c) : picks.add(c);
+    t.classList.toggle('is-on',picks.has(c)); t.setAttribute('aria-pressed',picks.has(c));
+    $('#pickCount').textContent = picks.size + ' selected';
+    $('[data-finish]').disabled = picks.size < MIN_PICKS;
+  }
+  else if(t.hasAttribute('data-finish')) finishAuth();
+  else if(t.hasAttribute('data-google')){ draft = {name:'Google user',username:'googleuser',email:'user@gmail.com'}; picks = new Set(); renderPicks(); }
+  else if(t.hasAttribute('data-forgot')) toast('If that email exists, a reset link is on its way (demo)');
+});
+modal.addEventListener('submit',e=>{
+  e.preventDefault();
+  const err = m => { $('#authErr').textContent = m; };
+  if(e.target.id==='regForm'){
+    const v = s => $(s).value.trim();
+    const name=v('#rName'), user=v('#rUser').replace(/^@/,''), mail=v('#rMail'), p1=$('#rPass').value, p2=$('#rPass2').value;
+    if(!name || !user || !mail || !p1) return err('Fill in every field.');
+    if(!/^[a-z0-9_]{3,20}$/i.test(user)) return err('Username: 3 to 20 letters, numbers or underscores.');
+    if(!/^\S+@\S+\.\S+$/.test(mail)) return err('Enter a valid email address.');
+    if(p1.length < 6) return err('Password needs at least 6 characters.');
+    if(p1 !== p2) return err('Passwords do not match.');
+    draft = {name, username:user.toLowerCase(), email:mail}; picks = new Set(); renderPicks();
+  }
+  else if(e.target.id==='loginForm'){
+    const mail = $('#lMail').value.trim(), pass = $('#lPass').value;
+    if(!/^\S+@\S+\.\S+$/.test(mail)) return err('Enter a valid email address.');
+    if(!pass) return err('Enter your password.');
+    let saved = null; try{ saved = JSON.parse(localStorage.getItem(LS_KEY)); }catch{}
+    if(saved && saved.email===mail){ me = saved; saveMe(); closeAuth(); tab = me.cats?.length ? 'foryou' : 'latest'; applyMe(); renderFeed(); toast('Welcome back, ' + me.name.split(' ')[0]); return; }
+    const base = mail.split('@')[0];
+    draft = {name:base, username:base.replace(/[^a-z0-9_]/gi,'').toLowerCase() || 'member', email:mail}; picks = new Set(); renderPicks();
+  }
+});
+if(me?.cats?.length) tab = 'foryou';
+applyMe();
+
+/* theme */
+const root = document.documentElement;
+$('#themeToggle').addEventListener('click',()=>{
+  const isDark = root.dataset.theme==='dark' || (root.dataset.theme!=='light' && matchMedia('(prefers-color-scheme:dark)').matches);
+  root.dataset.theme = isDark ? 'light' : 'dark';
+});
+</script>
+</body>
+</html>
